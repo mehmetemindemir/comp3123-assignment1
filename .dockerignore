@@ -1,0 +1,20 @@
+# dependencies
+node_modules
+npm-debug.log
+yarn.lock
+pnpm-lock.yaml
+
+# env & local
+.env
+.env.*
+.DS_Store
+
+# vcs & tooling
+.git
+.gitignore
+.vscode
+.idea
+
+# misc
+postman
+coverage
