@@ -1,0 +1,15 @@
+# Backend workspace
+backend/node_modules
+backend/.env
+backend/.env.*
+backend/npm-debug.log*
+backend/yarn.lock
+backend/pnpm-lock.yaml
+frontend/node_modules
+frontend/dist
+frontend/npm-debug.log*
+frontend/yarn.lock
+frontend/pnpm-lock.yaml
+data/
+backend/uploads/
+**/.DS_Store

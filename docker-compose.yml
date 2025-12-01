@@ -1,29 +1,41 @@
-version: "3.9"
-
 services:
   api:
     build:
-      context: .
-      target: prod        
+      context: ./backend
+      dockerfile: Dockerfile
+      target: prod
     image: demirmehmetemin/comp3123-api:latest
     container_name: comp3123-api
     restart: unless-stopped
     env_file:
-      - .env             
+      - backend/.env
     environment:
       MONGODB_URI: mongodb://admin:med7319@mongodb:27017/comp3123_assignment1?authSource=admin
-      PORT: 8090
+      PORT: 8092
       JWT_SECRET: Kh2U5Y0tQ8LC8OXwQ3GmWf6RtvfV1vFgTZ0KjJpJgMSH/0kso+3HxY6EZhyM1z9pw13N3AtbyxD8eKk2fVjM8w==
       CONTEXT_PATH: /gbc-service/comp3123
     ports:
-      - "8090:8090"
+      - "8092:8092"
     depends_on:
       - mongodb
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:8090/gbc-service/comp3123/health"]
+      test: ["CMD", "wget", "-qO-", "http://localhost:8092/gbc-service/comp3123/health"]
       interval: 10s
       timeout: 3s
       retries: 5
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: prod
+    image: demirmehmetemin/comp3123-frontend:latest
+    container_name: comp3123-frontend
+    restart: unless-stopped
+    ports:
+      - "3002:80"
+    depends_on:
+      - api
 
   mongodb:
     image: mongo:7
@@ -36,7 +48,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: med7319
       MONGO_INITDB_DATABASE: comp3123_assignment1
     volumes:
-      - mongo_data:/data/db
+      - ./data/mongo:/data/db
   mongo-express:
     image: mongo-express:1.0.2-20
     container_name: comp3123-mongo-express
@@ -50,6 +62,3 @@ services:
       ME_CONFIG_BASICAUTH_PASSWORD: med7319
       ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
       ME_CONFIG_MONGODB_URL: mongodb://admin:med7319@mongodb:27017/admin
-
-volumes:
-  mongo_data:
