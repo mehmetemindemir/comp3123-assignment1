@@ -27,7 +27,7 @@ Node.js + Express service that demonstrates authentication and employee manageme
    | Variable      | Description                                                                                   | Example                                                   |
    |---------------|-----------------------------------------------------------------------------------------------|-----------------------------------------------------------|
    | `MONGODB_URI` | Connection string for MongoDB (include credentials if required).                              | `mongodb://admin:password@localhost:27017/comp3123`       |
-   | `PORT`        | Port the API listens on.                                                                      | `8090`                                                    |
+   | `PORT`        | Port the API listens on.                                                                      | `8092`                                                    |
    | `JWT_SECRET`  | Secret used to sign JSON Web Tokens. Use a long random string.                                | _generated secret_                                        |
    | `CONTEXT_PATH`| Base path prefix for all routes.                                                              | `/gbc-service/comp3123`                                   |
 
